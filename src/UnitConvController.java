@@ -2,6 +2,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.math.BigInteger;
+import java.text.DecimalFormat;
 
 
 /**
@@ -16,6 +17,7 @@ public class UnitConvController{
 
 	private UnitConvModel model;
 	private  UnitConvView  view;
+	DecimalFormat format = new DecimalFormat();
 	
 	/**
 	 * Initialises this controller with the passed model and view.
@@ -36,6 +38,7 @@ public class UnitConvController{
 		this.view.addFtoCListener(new FtoCListener());
 		this.view.addResetListener(new ResetListener());
 		this.view.addSaveListener(new SaveListener());
+		format.setMaximumFractionDigits(3);
 	}
 	
 	/**
@@ -184,7 +187,7 @@ public class UnitConvController{
 			
 			doOperation(InputFieldValue);
 			double modelresultvalue = getModel().getResultValue();
-			getView().setResultValue(Double.toString(modelresultvalue));
+			getView().setResultValue(String.valueOf(format.format(modelresultvalue)));
 		}
 	}
 

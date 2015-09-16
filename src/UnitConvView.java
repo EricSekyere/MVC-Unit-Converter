@@ -98,7 +98,7 @@ public class UnitConvView extends JFrame implements Serializable{
 		
 		p2 = new JPanel();
 		add(p2);
-		p2.setLayout(new GridLayout(4,2));
+		p2.setLayout(new GridLayout(3,2));
 		
 		C_to_F = new JButton("\u00B0C to F");
 		p2.add(C_to_F);

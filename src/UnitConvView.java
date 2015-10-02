@@ -1,17 +1,11 @@
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.awt.GraphicsEnvironment;
 import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.font.GraphicAttribute;
 import java.io.File;
 import java.io.Serializable;
 
-import javax.swing.AbstractButton;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
@@ -21,8 +15,6 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.LookAndFeel;
-import javax.swing.UIManager;
 
 /**
  * 
@@ -35,6 +27,8 @@ public class UnitConvView extends JFrame implements Serializable{
 	// the field attributes of the converter view.
 
 	private static final long serialVersionUID = -2264954212524054813L;
+	
+	@SuppressWarnings("unused")
 	private  UnitConvModel model;
 	private  JButton cm_to_inches;
 	private  JButton kg_to_lb;
@@ -51,6 +45,8 @@ public class UnitConvView extends JFrame implements Serializable{
 	private  JTextField inputField;
 	private  JTextField resultfield;
 	private  JFileChooser openFileDialogWindow;
+	private JLabel input;
+	private JLabel output;
 	
 	
 	/**
@@ -60,7 +56,9 @@ public class UnitConvView extends JFrame implements Serializable{
 
 	public UnitConvView(UnitConvModel model){
 		super("Unit Converter Application");
+		
 		this.model = model;
+		
 		GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
 		String []fontFamilies = ge.getAvailableFontFamilyNames();
 		// creating the frame
@@ -89,7 +87,7 @@ public class UnitConvView extends JFrame implements Serializable{
 		p1.setLayout(new GridLayout(2, 2, 5, 0));
 		
 		// the input value textfield
-		JLabel input = new JLabel("Input Value");
+		input = new JLabel("Input Value");
 		input.setFont(new Font(fontFamilies[70], Font.PLAIN, 30));
 		p1.add(input);
 		inputField = new JTextField(20);
@@ -97,7 +95,7 @@ public class UnitConvView extends JFrame implements Serializable{
 		p1.add(inputField);
 		
 		//the result value  textfield
-		JLabel output = new JLabel("Result Value");
+		output = new JLabel("Result Value");
 		output.setFont(new Font(fontFamilies[70], Font.PLAIN, 30));
 		p1.add(output);
 		resultfield = new JTextField(20);
@@ -137,31 +135,25 @@ public class UnitConvView extends JFrame implements Serializable{
 		Object[] nodes = {	this.C_to_F, this.F_to_C,
 							this.inputField,this.resultfield,
 							this.kg_to_lb,this.lb_to_kg,
+							this.input, this.output,
 							this.inches_to_cm,this.cm_to_inches,
 							this.save, this.reset,
 							this.file, this
 						};
 		int i =0;
 		while(i < nodes.length){
-			if(nodes[i] instanceof JButton){
-				JButton a = (JButton)nodes[i];
-				a.setFont(new Font(fontFamilies[70], Font.PLAIN, 25));
-			}
+			if(nodes[i] instanceof JButton)			{((JButton)nodes[i]).setFont(new Font(fontFamilies[70], Font.PLAIN, 25));}
+			else if(nodes[i] instanceof JMenuItem)	{((JMenuItem)nodes[i]).setFont(new Font(fontFamilies[70], Font.CENTER_BASELINE, 25));}
+			else if(nodes[i] instanceof JLabel)		{((JLabel)nodes[i]).setFont(new Font(fontFamilies[70], Font.PLAIN, 25));}
 			else if(nodes[i] instanceof JTextField){
 				JTextField b = (JTextField)nodes[i];
 				b.setHorizontalAlignment(JTextField.CENTER);
 				b.setFont(new Font(fontFamilies[70], Font.PLAIN, 35));
 			}
-			else if(nodes[i] instanceof JMenuItem){
-				JMenuItem c = (JMenuItem)nodes[i];
-				c.setFont(new Font(fontFamilies[70], Font.CENTER_BASELINE, 25));
-			}
-			else if(nodes[i] instanceof JFrame){
-				((JFrame)nodes[i]).setFont(new Font(fontFamilies[70], Font.PLAIN, 25));
-			}
 			i++;
 		}
 		// passing the controller to the view
+		@SuppressWarnings("unused")
 		UnitConvController control = new UnitConvController(model, this);
 		
 		this.openFileDialogWindow = new JFileChooser();

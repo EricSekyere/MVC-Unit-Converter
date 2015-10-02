@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.io.Serializable;
+
 import javax.swing.*;
 
 
@@ -48,7 +49,7 @@ public class MVCUnitConverter {
 	
 	private final double faren_const = 9.0/5.0;
 	private final double faren_const2 = 32.0;
-	private final double iverse_const = 5.0/9.0;
+	private final double inverse_const = 5.0/9.0;
 	private double inputValue;
 	private double resultValue;
 
@@ -116,13 +117,13 @@ public class MVCUnitConverter {
 	}
 	
 	/**
-	 * Converts the passed value in Fahrenheit to the corresponding temperature in Celcius
+	 * Converts the passed value in Farenheit to the corresponding temperature in Celcius
 	 * @param f a temperature in Fahrenheit
 	 */
 
 	public void fToC(double f){
 		inputValue = f;
-		resultValue = (inputValue - this.faren_const2)/this.faren_const ;
+		resultValue = (inputValue - this.faren_const2)/this.inverse_const ;
 		
 		//calling collectString to collect id's
 		collectStrings("\u00B0F", "\u00B0C");
@@ -183,7 +184,8 @@ public class MVCUnitConverter {
 		PrintWriter tempFile;
 		try{
 			tempFile = new PrintWriter(file);
-			if((getFirststring() == "\u00B0C" && getSecondstring()== "\u00B0F")||(getFirststring() == "\u00B0F" && getSecondstring()== "\u00B0C")){
+			if((getFirststring() == "\u00B0C" && getSecondstring()== "\u00B0F")||
+				(getFirststring() == "\u00B0F" && getSecondstring()== "\u00B0C")){
 				tempFile.println(this.getInputValue()+this.second+ " to "+this.getResultValue()+this.first);
 			}
 			else{
@@ -216,15 +218,11 @@ public class MVCUnitConverter {
 //==========================================================================================================================================///////
    
    
-   
-   
-   
-   
-   
-   
-   
-   
-   
+//==========================================================================================================================================///////
+//==========================================================================================================================================//////
+// 									******Now Implementing the View as an inner class******													/////
+//==========================================================================================================================================////
+//==========================================================================================================================================///   
    
    
    
@@ -234,6 +232,7 @@ public class MVCUnitConverter {
 		// the field attributes of the converter view.
 
 		private static final long serialVersionUID = -2264954212524054813L;
+		@SuppressWarnings("unused")
 		private  UnitConvModel model;
 		private  JButton cm_to_inches;
 		private  JButton kg_to_lb;
@@ -331,6 +330,7 @@ public class MVCUnitConverter {
 			pack();
 			
 			// passing the controller to the view
+			@SuppressWarnings("unused")
 			UnitConvController control = new UnitConvController(model, this);
 			
 			this.openFileDialogWindow = new JFileChooser();
@@ -479,12 +479,12 @@ public class MVCUnitConverter {
 }
    
  ///////////////////===============================================================================================//////////////////////
- //
- //
- //															The Controller Class
- //
- //
- //////////////////================================================================================================////////////////////
+ //																																	  //
+ //																																	 //
+ //															The Controller Class													//
+ //																																   //
+ //																																  //
+ //////////////////================================================================================================////////////////
    
    /**
     * 
@@ -500,7 +500,7 @@ public class MVCUnitConverter {
    	private  UnitConvView  view;
    	
    	/**
-   	 * Initialises this controller with the passed model and view.
+   	 * Initializes this controller with the passed model and view.
    	 * @param model the model to associate with this controller
    	 * @param view the view to associate with this controller
    	 */

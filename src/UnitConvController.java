@@ -1,7 +1,6 @@
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-import java.math.BigInteger;
 import java.text.DecimalFormat;
 
 
@@ -20,7 +19,7 @@ public class UnitConvController{
 	DecimalFormat format = new DecimalFormat();
 	
 	/**
-	 * Initialises this controller with the passed model and view.
+	 * Initializes this controller with the passed model and view.
 	 * @param model the model to associate with this controller
 	 * @param view the view to associate with this controller
 	 */

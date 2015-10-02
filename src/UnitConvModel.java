@@ -25,7 +25,7 @@ public class UnitConvModel{
 	
 	private final double faren_const = 9.0/5.0;
 	private final double faren_const2 = 32.0;
-	private final double iverse_const = 5.0/9.0;
+	private final double inverse_const = 5.0/9.0;
 	private double inputValue;
 	private double resultValue;
 
@@ -99,7 +99,7 @@ public class UnitConvModel{
 
 	public void fToC(double f){
 		inputValue = f;
-		resultValue = (inputValue - this.faren_const2)/this.faren_const ;
+		resultValue = (inputValue - this.faren_const2)/this.inverse_const ;
 		
 		//calling collectString to collect ids
 		collectStrings("\u00B0F", "\u00B0C");
@@ -160,12 +160,14 @@ public class UnitConvModel{
 		PrintWriter tempFile;
 		try{
 			tempFile = new PrintWriter(file);
-			final boolean checkstringvalue =(getFirststring() == "\u00B0C" && getSecondstring()== "\u00B0F")||(getFirststring() == "\u00B0F" && getSecondstring()== "\u00B0C"); 
+			final boolean checkstringvalue =(getFirststring() == "\u00B0C" && getSecondstring()== "\u00B0F")||
+											(getFirststring() == "\u00B0F" && getSecondstring()== "\u00B0C"); 
 			if(checkstringvalue){
 				tempFile.println(this.getInputValue()+this.second+ " to "+this.getResultValue()+this.first);
 			}
 			else{
-			tempFile.println(this.getInputValue()+" "+this.second+ " to "+this.getResultValue()+" "+this.first);
+			tempFile.println(this.getInputValue()+" "+this.second+ " to "+
+								 this.getResultValue()+" "+this.first);
 			}
 			tempFile.close();
 		}
